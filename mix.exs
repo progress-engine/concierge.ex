@@ -37,7 +37,7 @@ defmodule Concierge.Mixfile do
   end
 
   defp package do
-     maintainers: ["Ivan Kryak", "Alexey Poimtsev"],
+     [maintainers: ["Ivan Kryak", "Alexey Poimtsev"],
      licenses: ["MIT"],
      links: %{"GitHub" => "https://github.com/progress-engine/concierge.ex"}]
   end
