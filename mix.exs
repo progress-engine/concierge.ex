@@ -4,6 +4,8 @@ defmodule Concierge.Mixfile do
   def project do
     [app: :concierge,
      version: "0.0.1",
+     description: description,
+     package: package,
      elixir: "~> 1.1",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix] ++ Mix.compilers,
@@ -27,6 +29,19 @@ defmodule Concierge.Mixfile do
 
   defp elixirc_paths(:test), do: ["lib", "web", "test/support"]
   defp elixirc_paths(_),     do: ["lib", "web"]
+
+  defp description do
+    """
+    Swiss army knife authentication framework for Elixir projects.
+    """    
+  end
+
+  defp package do
+     maintainers: ["Ivan Kryak", "Alexey Poimtsev"],
+     licenses: ["MIT"],
+     links: %{"GitHub" => "https://github.com/progress-engine/concierge.ex"}]
+  end
+
 
   # Dependencies can be Hex packages:
   #
