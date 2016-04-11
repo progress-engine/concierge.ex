@@ -11,10 +11,7 @@ defmodule Concierge.Controller do
 
   @doc false
   defmacro __using__(_) do    
-    quote do 
-      plug Guardian.Plug.VerifySession
-      plug Guardian.Plug.LoadResource
-      
+    quote do       
       use Concierge.Helpers
       use Concierge.Controller.Helpers
       import Concierge.Controller

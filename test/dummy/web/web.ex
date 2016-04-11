@@ -38,6 +38,7 @@ defmodule Dummy.Web do
       import Dummy.Gettext
 
       use Concierge.Controller
+      plug Concierge.Plug.Authentication
     end
   end
 

@@ -29,6 +29,7 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
           quote do 
             # ...
             use Concierge.Controller
+            plug Concierge.Plug.Authentication
           end  
         end
 
@@ -41,9 +42,9 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
 
   6. Add to `web/router.ex`
 
-    concierge at: "users", pipe_through: [:browser]
+        concierge at: "users", pipe_through: [:browser]
 
-  7. Start server and open [http://localhost:4000/users/sign_in]
+  7. Start server and open [http://localhost:4000/users/sign_in](http://localhost:4000/users/sign_in)
          
 ## Usage
 
@@ -71,7 +72,7 @@ Concierge provides `ensure_authenticated!` controller filter. It accepts `:only`
 
 ## TODO
 
-1. Confirmations
-2. OAuth
-3. ...
+- I18n
+- Confirmations
+- OAuth
 
