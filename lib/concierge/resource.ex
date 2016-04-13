@@ -35,7 +35,7 @@ defmodule Concierge.Resource do
     
     {:ok, result} = 
       Concierge.repo.transaction(fn ->    
-        Enum.map(Concierge.extensions, fn(ex) -> ex.run_before_create_callbacks!(changeset) end)  
+        Enum.map(Concierge.extensions, fn(ex) -> ex.before_create(changeset) end)  
 
         res = 
           changeset 
@@ -43,7 +43,7 @@ defmodule Concierge.Resource do
             |> Concierge.repo.insert
 
         case res do
-          {:ok, resource} -> Enum.map(Concierge.extensions, fn(ex) -> ex.run_after_create_callbacks!(resource) end)
+          {:ok, resource} -> Enum.map(Concierge.extensions, fn(ex) -> ex.after_create(resource) end)
           {:error, _} -> nil
         end    
         res

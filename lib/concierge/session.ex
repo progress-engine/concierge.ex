@@ -8,7 +8,7 @@ defmodule Concierge.Session do
   Signs resource in
   """
   def sign_in(conn, resource) do    
-    Enum.map(Concierge.extensions, fn(ex) -> ex.run_before_sign_in_callbacks!(resource) end) 
+    Enum.map(Concierge.extensions, fn(ex) -> ex.before_sign_in(resource) end) 
 
     conn = Guardian.Plug.sign_in(conn, resource)
     {:ok, conn}
