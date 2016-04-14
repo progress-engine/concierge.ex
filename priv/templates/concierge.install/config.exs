@@ -10,7 +10,9 @@ config :guardian, Guardian,
   serializer: <%= base %>.GuardianSerializer
 
 config :concierge, Concierge,
-  main_app: <%= base %>,
+  # Name of the application. If present, Concierge will 
+  # use it to determine standard Phoenix's module names
+  otp_app: <%= base %>,
   resource_name: <%= inspect singular %>
   # repo: <%= base %>.Repo,
   # resource: <%= module %>,

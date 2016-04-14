@@ -1,5 +1,5 @@
 defmodule Concierge do
-  def main_app, do: config(:main_app)
+  def otp_app, do: config(:otp_app)
 
   def resource, do: config(:resource, app_module("User"))
   def repo, do: config(:repo, app_module("Repo"))
@@ -32,10 +32,10 @@ defmodule Concierge do
   end
 
   defp app_module(module_name) do
-    if main_app do
-      :"#{main_app}.#{module_name}"
+    if otp_app do
+      :"#{otp_app}.#{module_name}"
     else
-      raise "Some of :main_app or module names should be defined"
+      raise "Some of :otp_app or module names should be defined"
     end
   end
 end

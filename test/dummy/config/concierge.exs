@@ -10,7 +10,7 @@ config :guardian, Guardian,
   serializer: Dummy.GuardianSerializer
 
 config :concierge, Concierge,
-  main_app: Dummy,
+  otp_app: Dummy,
   # repo: Dummy.Repo,
   # resource: Dummy.User,
   # route_helpers: Dummy.Router.Helpers,

@@ -7,7 +7,7 @@ config :guardian, Guardian,
   serializer: Concierge.GuardianTestSerializer
 
 config :concierge, Concierge,
-  main_app: Concierge,
+  otp_app: Concierge,
   resource: Concierge.TestUser,
   repo: Concierge.TestRepo,
   resource_name: "user",
