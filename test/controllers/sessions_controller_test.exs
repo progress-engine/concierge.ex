@@ -17,9 +17,18 @@ defmodule Concierge.SessionsControllerTest do
   end
 
   test "sign in", %{conn: conn} do
-    {:ok, user = %Concierge.TestUser{}} = Concierge.Resource.create(%{"email" => "concierge@test.com", "password" => "123456789", "password_confirmation" => "123456789"})
+    {:ok, _user = %Concierge.TestUser{}} = Concierge.Resource.create(%{
+      "email" => "concierge@test.com", 
+      "password" => "123456789", 
+      "password_confirmation" => "123456789",
+    })
 
-    conn = post(conn, Concierge.route_helpers.sessions_path(conn, :new, %{ "user" => %{ "email" => "concierge@test.com", "password" => "123456789"} }))
+    conn = post(conn, Concierge.route_helpers.sessions_path(conn, :new, %{
+      "user" => %{ 
+        "email" => "concierge@test.com", 
+        "password" => "123456789",
+      }
+    }))
 
     assert conn.status == 302
   end

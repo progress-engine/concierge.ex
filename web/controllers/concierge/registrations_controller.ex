@@ -12,7 +12,7 @@ defmodule Concierge.RegistrationsController do
       {:ok, user} -> sign_in_and_redirect(conn, user)        
       {:error, changeset} ->
         conn           
-          |> render("new.html", changeset: changeset)    
+        |> render("new.html", changeset: changeset)    
     end
   end
 end

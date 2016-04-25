@@ -8,7 +8,7 @@ defmodule Concierge.Plug.Authentication do
   @doc false
   def call(conn, opts) do
     conn 
-      |> Guardian.Plug.VerifySession.call(opts)
-      |> Guardian.Plug.LoadResource.call(opts)
+    |> Guardian.Plug.VerifySession.call(opts)
+    |> Guardian.Plug.LoadResource.call(opts)
   end
 end

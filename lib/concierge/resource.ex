@@ -39,8 +39,8 @@ defmodule Concierge.Resource do
 
         res = 
           changeset 
-            |> with_encrypted_password
-            |> Concierge.repo.insert
+          |> with_encrypted_password
+          |> Concierge.repo.insert
 
         case res do
           {:ok, resource} -> Enum.map(Concierge.extensions, fn(ex) -> ex.after_create(resource) end)
@@ -91,8 +91,8 @@ defmodule Concierge.Resource do
   defp with_encrypted_password(changeset) do
     encrypted_password = Comeonin.Bcrypt.hashpwsalt(changeset.params["password"])
 
-    changeset |>
-      Ecto.Changeset.put_change(:encrypted_password, encrypted_password)
+    changeset 
+    |> Ecto.Changeset.put_change(:encrypted_password, encrypted_password)
   end
 
   @doc """
