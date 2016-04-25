@@ -4,8 +4,8 @@ defmodule Concierge.Controller do
 
     def unauthenticated(conn, _params) do
       conn 
-        |> put_flash(:error, "Unauthenticated")
-        |> redirect(to: "/")
+      |> put_flash(:error, "Unauthenticated")
+      |> redirect(to: "/")
     end  
   end
 
@@ -29,11 +29,13 @@ defmodule Concierge.Controller do
     cond do
       Enum.any?(only) ->
         quote do
-          plug Guardian.Plug.EnsureAuthenticated, [handler: unquote(handler)] when var!(action) in unquote(only) 
+          plug Guardian.Plug.EnsureAuthenticated, [
+            handler: unquote(handler)] when var!(action) in unquote(only) 
         end
       Enum.any?(except) ->
         quote do
-          plug Guardian.Plug.EnsureAuthenticated, [handler: unquote(handler)] when not var!(action) in unquote(except) 
+          plug Guardian.Plug.EnsureAuthenticated, [
+            handler: unquote(handler)] when not var!(action) in unquote(except) 
         end
       true ->  
         quote do
