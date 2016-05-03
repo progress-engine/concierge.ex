@@ -14,13 +14,15 @@ defmodule Concierge.ResourceTest do
   end
 
   test "creates user" do
-    assert {:ok, user = %Confirmable.TestUser{}} = Concierge.Resource.create(%{"email" => "concierge@test.com", "password" => "123456789", "password_confirmation" => "123456789"})
+    assert {:ok, user = %Confirmable.TestUser{}} = Concierge.Resource.Registration.create(%{"email" => "concierge@test.com", 
+      "password" => "123456789", "password_confirmation" => "123456789"})
     assert user.email == "concierge@test.com"  
   end 
 
   test "calls mailer" do
     with_mock Mailgun.Client, [send_email: fn _, _ -> {:ok, "response"} end] do
-      {:ok, user} = Concierge.Resource.create(%{"email" => "concierge@test.com", "password" => "123456789", "password_confirmation" => "123456789"})  
+      {:ok, user} = Concierge.Resource.Registration.create(%{"email" => "concierge@test.com", 
+        "password" => "123456789", "password_confirmation" => "123456789"})  
 
       assert called Mailgun.Client.send_email(:_, :_)
     end

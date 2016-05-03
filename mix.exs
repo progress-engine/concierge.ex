@@ -59,6 +59,7 @@ defmodule Concierge.Mixfile do
      {:postgrex, ">= 0.0.0", only: :test},
      {:ecto, "~> 1.1.5"},
      {:guardian, "~> 0.10.1"},
-     {:comeonin, "~> 2.1"}]
+     {:comeonin, "~> 2.1"},
+     {:mailgun, "~> 0.1.2"}]
   end
 end

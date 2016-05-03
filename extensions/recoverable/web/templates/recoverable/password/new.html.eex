@@ -1,0 +1,11 @@
+<h3>Recover password</h3>
+<%= form_for @changeset, Concierge.route_helpers.password_path(@conn, :create), fn f -> %>
+  <div class="form-group">
+    <label>Email</label>
+    <%= text_input f, :email, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= submit "Send password reset information", class: "btn btn-primary" %>
+  </div>
+<% end %>

@@ -9,6 +9,9 @@ defmodule Concierge do
   def gettext, do: config(:gettext, app_module("Gettext"))
   def error_helpers, do: config(:error_helpers, app_module("ErrorHelpers"))
 
+  def sender_address, do: config(:sender_address, "change-me@email.com")
+  def mailer_options, do: config(:mailer_options, [mode: :test, test_file_path: "/tmp/mailgun.json", domain: "", key: ""])
+
   def extensions, do: config(:extensions, [])
 
   def auth_error_handler, do: config(:auth_error_handler, Concierge.Controller.AuthErrorHandler)

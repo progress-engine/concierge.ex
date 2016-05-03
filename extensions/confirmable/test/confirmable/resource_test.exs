@@ -13,12 +13,14 @@ defmodule Confirmable.ResourceTest do
   end
 
   test "creates user" do
-    assert {:ok, user = %Confirmable.TestUser{}} = Concierge.Resource.create(%{"email" => "concierge@test.com", "password" => "123456789", "password_confirmation" => "123456789"})
+    assert {:ok, user = %Confirmable.TestUser{}} = Concierge.Resource.Registration.create(%{"email" => "concierge@test.com", 
+      "password" => "123456789", "password_confirmation" => "123456789"})
     assert user.email == "concierge@test.com"  
   end 
 
   test "confirms resource" do
-    {:ok, user} = Concierge.Resource.create(%{"email" => "concierge@test.com", "password" => "123456789", "password_confirmation" => "123456789"})
+    {:ok, user} = Concierge.Resource.Registration.create(%{"email" => "concierge@test.com", 
+      "password" => "123456789", "password_confirmation" => "123456789"})
 
     user = Confirmable.TestRepo.get(Confirmable.TestUser, user.id)
 
@@ -26,7 +28,9 @@ defmodule Confirmable.ResourceTest do
   end
 
   test "resource is confirmed after confirmation" do
-    {:ok, user} = Concierge.Resource.create(%{"email" => "concierge@test.com", "password" => "123456789", "password_confirmation" => "123456789"})
+    {:ok, user} = Concierge.Resource.Registration.create(%{"email" => "concierge@test.com", 
+      "password" => "123456789", "password_confirmation" => "123456789"})
+    
     user = Confirmable.TestRepo.get(Confirmable.TestUser, user.id)
     Confirmable.Resource.confirm!(user.email, user.confirmation_token)
 

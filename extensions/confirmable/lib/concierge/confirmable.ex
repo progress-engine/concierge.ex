@@ -1,5 +1,6 @@
 defmodule Concierge.Confirmable do
-  @behaviour Concierge.Extension
+  @behaviour Concierge.Resource.Registration.Callbacks
+  @behaviour Concierge.Resource.Session.Callbacks
 
   def before_create(_), do: true
 

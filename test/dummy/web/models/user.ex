@@ -11,6 +11,9 @@ defmodule Dummy.User do
     field :confirmed_at, Ecto.DateTime
     field :confirmation_sent_at, Ecto.DateTime
 
+    field :reset_password_token, :string
+    field :reset_password_token_sent_at, Ecto.DateTime
+
     timestamps
   end
 

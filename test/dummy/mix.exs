@@ -38,7 +38,8 @@ defmodule Dummy.Mixfile do
      {:gettext, "~> 0.9"},
      {:cowboy, "~> 1.0"},
      {:concierge, path: "../../."},
-     {:confirmable, path: "../../extensions/confirmable/."}]
+     {:confirmable, path: "../../extensions/confirmable/."},
+     {:recoverable, path: "../../extensions/recoverable/."}]
   end
 
   # Aliases are shortcut or tasks specific to the current project.

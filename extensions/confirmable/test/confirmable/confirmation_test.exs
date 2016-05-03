@@ -14,14 +14,16 @@ defmodule Confirmable.ConfirmationTest do
   end
   
   test "generates sent time" do
-    {:ok, user} = Concierge.Resource.create(%{"email" => "concierge@test.com", "password" => "123456789", "password_confirmation" => "123456789"})
+    {:ok, user} = Concierge.Resource.Registration.create(%{"email" => "concierge@test.com", 
+      "password" => "123456789", "password_confirmation" => "123456789"})
 
     user = Confirmable.TestRepo.get(Confirmable.TestUser, user.id)
     assert user.confirmation_sent_at != nil
   end
 
   test "generates confirmation token" do
-    {:ok, user} = Concierge.Resource.create(%{"email" => "concierge@test.com", "password" => "123456789", "password_confirmation" => "123456789"})
+    {:ok, user} = Concierge.Resource.Registration.create(%{"email" => "concierge@test.com", 
+      "password" => "123456789", "password_confirmation" => "123456789"})
 
     user = Confirmable.TestRepo.get(Confirmable.TestUser, user.id)
     assert user.confirmation_token != nil

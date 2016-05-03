@@ -20,7 +20,7 @@ defmodule Confirmable.Confirmation do
 
   @doc false
   defp send_confirmation_email(resource) do
-    url = Concierge.route_helpers.confirmations_url(Concierge.endpoint, :show, email: resource.email, confirmation_token: resource.confirmation_token)
+    url = Concierge.route_helpers.confirmation_url(Concierge.endpoint, :show, email: resource.email, confirmation_token: resource.confirmation_token)
 
     Confirmable.mailer.send_confirmation_email(resource, url)
   end

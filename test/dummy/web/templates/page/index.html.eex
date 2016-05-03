@@ -2,12 +2,13 @@
   <h2><%= gettext "Welcome to %{name}", name: "Phoenix!" %></h2>
   <%= if user_signed_in?(@conn) do %>
     <p>You are <%= current_user(@conn).email %></p>
-    <p><%= button("Sign out", to: sessions_path(@conn, :destroy), class: "btn btn-danger", method: "delete") %></p>
+    <p><%= button("Sign out", to: session_path(@conn, :destroy), class: "btn btn-danger", method: "delete") %></p>
     <p>You can access to <%= link("Protected area", to: page_path(@conn, :protected)) %></p>
   <% else %>
     <p> You are anonymous </p>
-    <p><%= link("Sign in", to: sessions_path(@conn, :new), class: "btn btn-primary") %>
+    <p><%= link("Sign in", to: session_path(@conn, :new), class: "btn btn-primary") %>
     <p>You cannot access to <%= link("Protected area", to: page_path(@conn, :protected)) %></p>
+    <p><%= #link("Forgot password", to: recoverable_password_path(@conn, :new), class: "btn btn-primary") %></p>
   <% end %>    
   <p class="lead">A productive web framework that<br />does not compromise speed and maintainability.</p>
 </div>

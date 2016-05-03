@@ -32,7 +32,6 @@ defmodule Confirmable.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [{:concierge, path: "../../"},
-     {:mailgun, "~> 0.1.2"},
      {:phoenix_html, "~> 2.5", only: :test},
      {:phoenix_ecto, "~> 2.0", only: :test},
      {:postgrex, ">= 0.0.0", only: :test},
