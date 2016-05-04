@@ -1,18 +1,19 @@
 defmodule Confirmable.Resource do
+  @moduledoc """
+  Holds function to perform confirmation on resource
+  """
 
+  @doc """
+  Find resource by its credentials and confirm it by setting it's confirmed_at to actual time
+  """
   def confirm!(email, confirmation_token) do
     find_resource(email, confirmation_token)   
-      |> do_confirmation
+    |> confirm!
   end
-
-  defp find_resource(email, confirmation_token) do    
-    Concierge.repo.get_by(resource, email: email, confirmation_token: confirmation_token)
-  end
-
-  defp do_confirmation(nil) do
+  def confirm!(nil) do
     {:error}        
   end
-  defp do_confirmation(resource) do
+  def confirm!(resource) do
     case confirmed?(resource) do
       true -> {:ok, resource}
       false ->
@@ -22,10 +23,19 @@ defmodule Confirmable.Resource do
     end
   end
 
+  @doc """
+  Verifies whether a resource is confirmed or not
+  """
   def confirmed?(nil), do: false
   def confirmed?(resource) do
     !is_nil(resource.confirmed_at)
   end
 
+  @doc false
+  defp find_resource(email, confirmation_token) do    
+    Concierge.Resource.get_by(email: email, confirmation_token: confirmation_token)
+  end
+
+  @doc false
   defp resource, do: Concierge.resource
 end

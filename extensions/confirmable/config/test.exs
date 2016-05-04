@@ -4,7 +4,7 @@ config :guardian, Guardian,
   issuer: "Concierge",
   ttl: { 30, :days },
   secret_key: "test",
-  serializer: Concierge.GuardianTestSerializer
+  serializer: Confirmable.GuardianTestSerializer
 
 config :concierge, Concierge,
   otp_app: Confirmable,
