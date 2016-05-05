@@ -17,7 +17,6 @@ defmodule Concierge.Controller.Helpers do
           {:error, message} ->
             conn  
             |> put_flash(:error, message)
-            |> put_status(:unauthorized)
             |> redirect(to: "/")  
         end
       end

@@ -16,4 +16,5 @@ config :concierge, Concierge,
   # route_helpers: Dummy.Router.Helpers,
   resource_name: "user",
   # layout: {Dummy.LayoutView, "app.html"}
-  extensions: [Concierge.Confirmable, Concierge.Recoverable]
+  # extensions: [Concierge.Confirmable, Concierge.Recoverable]
+  extensions: [Concierge.Confirmable]
