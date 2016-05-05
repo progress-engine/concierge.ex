@@ -6,6 +6,7 @@
   "ecto": {:hex, :ecto, "1.1.5"},
   "guardian": {:hex, :guardian, "0.10.1"},
   "jose": {:hex, :jose, "1.7.3"},
+  "mailgun": {:hex, :mailgun, "0.1.2"},
   "phoenix": {:hex, :phoenix, "1.1.4"},
   "phoenix_ecto": {:hex, :phoenix_ecto, "2.0.1"},
   "phoenix_html": {:hex, :phoenix_html, "2.5.1"},
