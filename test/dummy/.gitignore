@@ -23,6 +23,6 @@ erl_crash.dump
 # variables.
 /config/prod.secret.exs
 
-/confif/dev.exs
-/confif/prod.exs
-/confif/test.exs
+/config/dev.exs
+/config/prod.exs
+/config/test.exs
