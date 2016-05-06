@@ -16,7 +16,6 @@ defmodule Concierge.Confirmable.ConfirmationController do
   defp error!(conn, message) do
     conn
     |> put_flash(:error, message)
-    |> put_status(:unprocessable_entity)
     |> redirect(to: "/")  
   end
 end
