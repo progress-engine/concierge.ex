@@ -61,5 +61,21 @@ defmodule Confirmable.ConfirmationControllerTest do
   end
 
   test "shows error when registration token has been expired" do 
+    {:ok, user = %Confirmable.TestUser{}} = Concierge.Resource.Registration.create(%{
+      "email" => "concierge@test.com", 
+      "password" => "123456789", 
+      "password_confirmation" => "123456789",
+    })
+
+    user = Confirmable.TestRepo.get(Confirmable.TestUser, user.id)
+    {:ok, expired} = Ecto.DateTime.cast("2015-05-05 12:27:33")
+    user = Ecto.Changeset.change user, confirmation_sent_at: expired
+    Confirmable.TestRepo.update user 
+
+    conn = get(conn, Concierge.route_helpers.confirmation_path(conn, :show), 
+      [email: user.email, confirmation_token: user.confirmation_token])
+
+    assert get_flash(conn, "error") == "Expired confirmation token!"
+
   end
 end
