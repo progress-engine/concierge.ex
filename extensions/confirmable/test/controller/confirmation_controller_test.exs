@@ -38,7 +38,7 @@ defmodule Confirmable.ConfirmationControllerTest do
     conn = get(conn, Concierge.route_helpers.confirmation_path(conn, :show), 
       [email: user.email, confirmation_token: "invalid_token"])
 
-    assert conn.status == 422
+    assert get_flash(conn, "error") == "Confirmation token is invalid"
 
     user = Confirmable.TestRepo.get(Confirmable.TestUser, user.id)
     refute Confirmable.Resource.confirmed?(user)
@@ -54,9 +54,12 @@ defmodule Confirmable.ConfirmationControllerTest do
     conn = get(conn, Concierge.route_helpers.confirmation_path(conn, :show), 
       [email: user.email])
 
-    assert conn.status == 422
+    assert get_flash(conn, "error") == "Invalid parameters"
 
     user = Confirmable.TestRepo.get(Confirmable.TestUser, user.id)
     refute Confirmable.Resource.confirmed?(user)
+  end
+
+  test "shows error when registration token has been expired" do 
   end
 end
