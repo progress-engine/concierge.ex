@@ -4,6 +4,7 @@ defmodule Concierge.Confirmable.ConfirmationController do
   def show(conn, %{"email" => email, "confirmation_token" => confirmation_token}) do    
     case Confirmable.Resource.confirm!(email, confirmation_token) do
       {:ok, resource} -> sign_in_and_redirect(conn, resource)  
+      {:error, message} -> error!(conn, message)
       {:error} -> error!(conn, "Confirmation token is invalid")
     end
   end

@@ -18,11 +18,8 @@ defmodule Confirmable.Resource do
       true -> {:ok, resource}
       false ->
         {:ok, datetime} = Ecto.DateTime.cast(:calendar.universal_time())
-        IO.inspect Confirmable.ttl
-        {:ok, send_at} = Ecto.DateTime.cast(resource.confirmation_sent_at)
-        IO.inspect send_at
-        case greater_than_ttl_days?(Ecto.DateTime.to_erl(send_at), Ecto.DateTime.to_erl(datetime)) do 
-          true -> {:error_expired_ttl}
+        case confirmation_expired?(resource) do 
+          true -> {:error, "Expired confirmation token!"}
           false -> 
             Ecto.Changeset.change(resource, %{confirmed_at: datetime})
             |> Concierge.repo.update
@@ -31,12 +28,20 @@ defmodule Confirmable.Resource do
   end
 
   @doc """
+  Verifies if confirmation has been expired or not
+  """
+  def confirmation_expired?(resource) do
+    {:ok, datetime} = Ecto.DateTime.cast(:calendar.universal_time())
+    {:ok, send_at} = Ecto.DateTime.cast(resource.confirmation_sent_at)
+    greater_than_ttl_days?(Ecto.DateTime.to_erl(send_at), Ecto.DateTime.to_erl(datetime), Confirmable.ttl)
+  end
+
+  @doc """
   Verifies if date A is greater than date B by TTL days or not
   """
-  def greater_than_ttl_days?(a, b) do
-    min = Confirmable.ttl * 24 * 60 * 60
-    (:calendar.datetime_to_gregorian_seconds(b) -
-     :calendar.datetime_to_gregorian_seconds(a)) >= min
+  def greater_than_ttl_days?(a, b, ttl) do
+    min = ttl * 24 * 60 * 60
+    (:calendar.datetime_to_gregorian_seconds(b) - :calendar.datetime_to_gregorian_seconds(a)) >= min
   end
 
   @doc """
