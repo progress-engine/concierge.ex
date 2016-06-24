@@ -1,6 +1,12 @@
 defmodule Concierge.Mixfile do
   use Mix.Project
 
+  # Mock Guardian config to do not fail on compile-time 
+  # while config did not generated yet
+  unless Application.get_env(:guardian, Guardian) do
+    Application.put_env(:guardian, Guardian, [serializer: ""], persistent: true)
+  end
+
   def project do
     [app: :concierge,
      version: "0.0.1",
@@ -58,7 +64,7 @@ defmodule Concierge.Mixfile do
      {:phoenix_ecto, "~> 2.0", only: :test},
      {:postgrex, ">= 0.0.0", only: :test},
      {:ecto, "~> 1.1.5"},
-     {:guardian, "~> 0.10.1"},
+     {:guardian, "~> 0.12.0"},
      {:comeonin, "~> 2.1"},
      {:mailgun, "~> 0.1.2"}]
   end

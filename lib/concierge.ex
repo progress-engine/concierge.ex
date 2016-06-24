@@ -1,4 +1,6 @@
 defmodule Concierge do
+  require Logger
+  
   def otp_app, do: config(:otp_app)
 
   def resource, do: config(:resource, app_module("User"))
@@ -25,20 +27,22 @@ defmodule Concierge do
   @doc false
   def config(key, default), do: config_entry(key, default)
 
+  @doc false
   defp config_entry(key), do: config_entry(key, nil)
   defp config_entry(key, default) do
     config = Application.get_env(:concierge, Concierge)
     case config do
-      nil -> raise "Concierge is not configured"
+      nil -> Logger.error("Concierge is not configured")
       _ -> Keyword.get(config, key, default)
     end    
   end
 
+  @doc false
   defp app_module(module_name) do
     if otp_app do
       :"#{otp_app}.#{module_name}"
-    else
-      raise "Some of :otp_app or module names should be defined"
+    else    
+      Logger.error("Some of :otp_app or module names should be defined")
     end
   end
 end

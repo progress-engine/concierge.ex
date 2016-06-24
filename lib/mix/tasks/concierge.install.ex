@@ -26,7 +26,35 @@ defmodule Mix.Tasks.Concierge.Install do
       {:eex, "guardian_serializer.ex", "lib/concierge/guardian_serializer.ex"},
       {:eex, "config.exs", "config/concierge.exs"}
     ]
-    # TODO add instructions
+    
+    Mix.Shell.IO.info """
+    Three more steps to go:
+
+    1. Add to config/config.exs:
+
+      import_config "concierge.exs"
+
+    2. Add to web/web.ex:
+
+      def controller do 
+        quote do 
+          # ...
+          use Concierge.Controller
+          plug Concierge.Plug.Authentication
+        end  
+      end
+
+      def view do
+        quote do
+          # ...
+          use Concierge.Helpers
+        end
+      end
+
+    3. Add to web/router.ex:
+    
+      concierge at: "users", pipe_through: [:browser]
+    """
   end
 
   defp validate_args!([_, plural] = args) do
