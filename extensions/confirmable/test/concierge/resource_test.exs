@@ -37,7 +37,11 @@ defmodule Concierge.ResourceTest do
 
     refute Confirmable.Resource.confirmed?(user)
 
-    assert {:error, _} = Concierge.Resource.Session.sign_in(Phoenix.ConnTest.conn(), user)
+    with_mock Guardian.Plug, [sign_in: fn(_, _) -> nil end] do
+      assert {:error, _} = Concierge.Resource.Session.sign_in(Phoenix.ConnTest.conn(), user)
+
+      refute called Guardian.Plug.sign_in(:_, :_)
+    end
   end
 
   test "it signs in confirmed user" do

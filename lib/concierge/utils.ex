@@ -13,13 +13,7 @@ defmodule Concierge.Utils do
   Run function for a set of Concierge extensions
   """
   def invoke_on_extensions(function, params) do
-    Enum.map(Concierge.extensions, fn(extension) ->
-      try do
-        apply(extension, function, params)
-      rescue 
-        UndefinedFunctionError -> nil  # Do nothing if function does not defined in extenstion module
-      end
-    end)
+    Concierge.Extension.invoke(function, params)
   end
 
   @doc """

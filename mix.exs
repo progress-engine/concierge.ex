@@ -63,6 +63,7 @@ defmodule Concierge.Mixfile do
      {:phoenix_html, "~> 2.5", only: :test},
      {:phoenix_ecto, "~> 2.0", only: :test},
      {:postgrex, ">= 0.0.0", only: :test},
+     {:mock, "~> 0.1.1", only: :test},
      {:ecto, "~> 1.1.5"},
      {:guardian, "~> 0.12.0"},
      {:comeonin, "~> 2.1"},
