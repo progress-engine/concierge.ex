@@ -14,24 +14,24 @@ defmodule Concierge.Resource.Session do
     Runs before sign in. 
     To halt the whole process you can use `throw {:error, "Error message"}` construction.
     """
-    @callback before_sign_in(Ecto.Schema.t) :: any
+    @callback before_sign_in(Plug.Conn.t, Ecto.Schema.t) :: {:ok} | {:error, any}
 
     @doc """
     Runs after sign in. 
     """
-    @callback after_sign_in(Ecto.Schema.t) :: any
+    @callback after_sign_in(Plug.Conn.t, Ecto.Schema.t) :: any
   end
 
   @doc """
   Signs resource in
   """
   def sign_in(conn, resource) do  
-    Concierge.Utils.invoke_on_extensions(:before_sign_in, [resource])  
-
-    conn = Guardian.Plug.sign_in(conn, resource)
-    {:ok, conn}
-  catch # TODO Invent cleaner way to return errors in before callbacks
-    {:error, message} -> {:error, message}
+    case Concierge.Utils.invoke_on_extensions(:before_sign_in, [conn, resource]) do
+      {:ok} ->
+        conn = Guardian.Plug.sign_in(conn, resource)       
+        {:ok, conn}
+      {:error, message} -> {:error, message}    
+    end
   end
 
   @doc """
